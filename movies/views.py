@@ -9,6 +9,7 @@ from .serializers import (CategorySerializer, ProductSerializer, ReviewSerialize
 
 @api_view(['GET', 'POST'])
 def category_api_view(request):
+    print(request.user)
     if request.method == 'GET':
         category_list = Category.objects.prefetch_related('products').all()
         data = CategorySerializer(instance=category_list, many=True).data
@@ -57,6 +58,7 @@ def category_detail_api_view(request, id):
 
 @api_view(['GET', 'POST'])
 def product_api_view(request):
+    print(request.user)
     if request.method == 'GET':
         product_list = Product.objects.prefetch_related('category', 'reviews').all()
         data = ProductSerializer(instance=product_list, many=True).data
